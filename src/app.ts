@@ -7,6 +7,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("API Recharge está no ar! 🚀");
+});
+
 app.use(router);
 app.use(errorHandler);
 

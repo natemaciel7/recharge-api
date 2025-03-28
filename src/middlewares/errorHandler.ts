@@ -5,11 +5,23 @@ export default function errorHandler(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): void {
   console.error(error);
-  if (error.type === "conflict") return res.status(409).send(error.message);
-  if (error.type === "not_found") return res.status(404).send(error.message);
-  if (error.type === "unprocessable_entity")
-    return res.status(422).send(error.message);
-  return res.status(500).send("Internal Server Error");
+
+  if (error.type === "conflict") {
+    res.status(409).send(error.message);
+    return;
+  }
+
+  if (error.type === "not_found") {
+    res.status(404).send(error.message);
+    return;
+  }
+
+  if (error.type === "unprocessable_entity") {
+    res.status(422).send(error.message);
+    return;
+  }
+
+  res.status(500).send("Internal Server Error");
 }
